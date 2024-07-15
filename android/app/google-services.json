@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "469947182047",
+    "project_id": "academix-fc710",
+    "storage_bucket": "academix-fc710.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469947182047:android:23adc4d59be9769996b26a",
+        "android_client_info": {
+          "package_name": "com.example.academix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJDhg_mH7WXAWqPucu8Ui4MGUeQpH5U_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
