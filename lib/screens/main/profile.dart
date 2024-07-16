@@ -63,11 +63,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               TextButton(
                 onPressed: isLoading
                     ? null
-                    : () => HelperFunctions.showConfirmationBottomSheet(context,
-                            onLogout: () {
-                          ap.signOut(context);
-                          Navigator.pop(context);
-                        }, message: 'Are you sure you want to logout?'),
+                    : () => HelperFunctions.showConfirmationBottomSheet(
+                          context,
+                          onPressed1: () {
+                            ap.signOut(context);
+                            Navigator.pop(context);
+                          },
+                          onPressed2: () {
+                            Navigator.pop(context);
+                          },
+                          icon1: Icons.check,
+                          icon2: Icons.clear,
+                          title1: 'Yes',
+                          title2: 'No',
+                          message: 'Are you sure you want to logout?',
+                        ),
                 child: Text(
                   'Logout',
                   style: Constants.body.copyWith(

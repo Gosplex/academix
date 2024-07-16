@@ -117,10 +117,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             )
           : WillPopScope(
               onWillPop: () async {
-                HelperFunctions.showConfirmationBottomSheet(context,
-                    onLogout: () {
-                  exitApp(context);
-                }, message: 'Are you sure you want to exit?');
+                HelperFunctions.showConfirmationBottomSheet(
+                  context,
+                  onPressed1: () {
+                    exitApp(context);
+                  },
+                  onPressed2: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon1: Icons.check,
+                  icon2: Icons.clear,
+                  title1: 'Yes',
+                  title2: 'No',
+                  message: 'Are you sure you want to exit?',
+                );
 
                 return false;
               },
@@ -754,7 +764,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       // Motivation Container
                       FlutterCarousel(
                         options: CarouselOptions(
-                          height: 190.0,
+                          height: 200,
                           showIndicator: true,
                           autoPlay: true,
                           autoPlayInterval: const Duration(seconds: 2),
@@ -812,7 +822,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
                       const SizedBox(height: 10),
                       Container(
-                        height: 120,
                         margin: const EdgeInsets.symmetric(horizontal: 16),
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(

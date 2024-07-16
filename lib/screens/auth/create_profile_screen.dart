@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -42,8 +43,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     _phoneController.addListener(_validatePhone);
   }
 
-  Future<void> _pickImage() async {
-    final pickedImage = await HelperFunctions.pickImage();
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedImage = await HelperFunctions.pickImage(source);
     setState(() {
       _image = pickedImage;
     });
@@ -157,9 +158,22 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             // Center text button, change image
             Center(
               child: TextButton(
-                onPressed: () {
-                  _pickImage();
-                },
+                onPressed: () => HelperFunctions.showConfirmationBottomSheet(
+                  context,
+                  onPressed1: () {
+                    _pickImage(ImageSource.camera);
+                    Navigator.of(context).pop();
+                  },
+                  onPressed2: () {
+                    _pickImage(ImageSource.gallery);
+                    Navigator.of(context).pop();
+                  },
+                  icon1: Icons.camera_alt,
+                  icon2: Icons.photo,
+                  title1: 'Camera',
+                  title2: 'Gallery',
+                  message: 'Choose Image Source',
+                ),
                 child: Text(
                   'Change Image',
                   style: Constants.body.copyWith(

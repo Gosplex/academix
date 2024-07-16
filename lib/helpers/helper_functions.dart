@@ -9,10 +9,12 @@ import '../constants/constants.dart';
 
 class HelperFunctions {
   // Single Image
-  static Future<File?> pickImage() async {
+  static Future<File?> pickImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile = await picker.pickImage(
+      source: source,
+      imageQuality: 95,
+    );
 
     if (pickedFile != null) {
       return File(pickedFile.path);
@@ -57,7 +59,12 @@ class HelperFunctions {
   // Show Confirmation Bottom Sheet
   static void showConfirmationBottomSheet(
     BuildContext context, {
-    required VoidCallback onLogout,
+    required VoidCallback onPressed1,
+    required VoidCallback onPressed2,
+    IconData? icon1,
+    IconData? icon2,
+    required String title1,
+    required String title2,
     required String message,
   }) {
     showModalBottomSheet(
@@ -88,30 +95,27 @@ class HelperFunctions {
                 ),
                 const SizedBox(height: 10),
                 TextButton.icon(
-                  onPressed: onLogout,
+                  onPressed: onPressed1,
                   icon: Icon(
-                    Icons.check,
+                    icon1,
                     color: Colors.green.withOpacity(0.8),
                   ),
-                  label: const Text(
-                    'Yes',
-                    style: TextStyle(
+                  label: Text(
+                    title1,
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.green,
                     ),
                   ),
                 ),
                 TextButton.icon(
-                  onPressed: () {
-                    // Handle No action
-                    Navigator.pop(context);
-                  },
+                  onPressed: onPressed2,
                   icon: Icon(
-                    Icons.close,
+                    icon2,
                     color: Colors.red.withOpacity(0.8),
                   ),
                   label: Text(
-                    'No',
+                    title2,
                     style: Constants.body.copyWith(
                       fontSize: 16,
                       color: Colors.red,
