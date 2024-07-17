@@ -6,7 +6,6 @@ import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
@@ -454,7 +453,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         pageBuilder: (context, animation,
                                                 secondaryAnimation) =>
                                             SingleCourseScreen(
-                                          courseTitle: courses[index],
+                                          courses: courses[index],
                                         ),
                                         transitionsBuilder: (context, animation,
                                             secondaryAnimation, child) {

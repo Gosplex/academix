@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/auth_provider.dart';
-import 'create_profile_screen.dart';
 import 'phone_auth_screen.dart';
 
 class PasswordSetScreen extends StatefulWidget {

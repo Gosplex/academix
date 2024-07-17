@@ -4,10 +4,12 @@ import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'single_course_screen.dart.dart';
+
 class CourseScreen extends StatefulWidget {
   const CourseScreen({super.key, required this.courses});
 
-   final List<String> courses;
+  final List<String> courses;
 
   @override
   State<CourseScreen> createState() => _CourseScreenState();
@@ -65,57 +67,85 @@ class _CourseScreenState extends State<CourseScreen> {
                   horizontal: 8.0,
                   vertical: 4,
                 ),
-                child: Container(
-                  height: 180,
-                  width: 180,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
-                    color: Colors.deepPurple.withOpacity(0.05),
-                    border: Border.all(
-                      color: Colors.deepPurple.withOpacity(0.1),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            SingleCourseScreen(
+                          courses: widget.courses[index],
+                        ),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          const begin = Offset(1.0, 0.0);
+                          const end = Offset.zero;
+                          const curve = Curves.easeInOut;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+                          var offsetAnimation = animation.drive(tween);
+
+                          return SlideTransition(
+                            position: offsetAnimation,
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 180,
+                    width: 180,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      color: Colors.deepPurple.withOpacity(0.05),
+                      border: Border.all(
+                        color: Colors.deepPurple.withOpacity(0.1),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Transform.rotate(
-                          angle: 0.05,
-                          child: Image.asset(
-                            'assets/images/letter_a.png',
-                            width: 65,
-                            height: 65,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Transform.rotate(
+                            angle: 0.05,
+                            child: Image.asset(
+                              'assets/images/letter_a.png',
+                              width: 65,
+                              height: 65,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          widget.courses[index].toUpperCase(),
-                          style: Constants.body.copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Text(
+                            widget.courses[index].toUpperCase(),
+                            style: Constants.body.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          '50+ Educational Materials Available',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Constants.body.copyWith(
-                            fontSize: 14,
-                            color: Colors.black.withOpacity(0.5),
+                        const SizedBox(height: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Text(
+                            '50+ Educational Materials Available',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Constants.body.copyWith(
+                              fontSize: 14,
+                              color: Colors.black.withOpacity(0.5),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );

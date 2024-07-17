@@ -34,15 +34,7 @@ class HelperFunctions {
       maxHeight: 800,
     );
 
-    if (pickedFiles != null) {
-      return pickedFiles;
-    } else {
-      // Handle the case when no image is picked.
-      print('No image selected.');
-      return [];
-    }
-
-    // Return XFile
+    return pickedFiles;
   }
 
   // Show Top Snack Bar
